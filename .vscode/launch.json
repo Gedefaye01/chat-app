@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Launch Java Program with .env",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "com.mySample.App",
+      "envFile": "${workspaceFolder}/.env"
+    }
+  ]
+}

@@ -1,0 +1,1137 @@
+/* style.css - Enhanced styling for the frontend */
+
+/* --- Theme Variables --- */
+:root {
+    /* Light Theme Defaults */
+    --bg-color: #e0f2f7; /* Overall background (soft gradient start) */
+    --bg-color-end: #c5e1ee; /* Overall background (soft gradient end) */
+    --header-bg-start: #34495e; /* Header background start */
+    --header-bg-end: #2c3e50; /* Header background end */
+    --header-text-color: #ffffff; /* Header text color */
+    --card-bg: #ffffff; /* Card background (auth, chat section) */
+    --chat-box-bg: #f5fafd; /* Chat messages box background */
+    --message-bg: #ffffff; /* Default message background */
+    --my-message-bg: #dcf8c6; /* My message background (light green) */
+    --system-message-color: #6c757d; /* System message text color */
+    --text-color: #333; /* General text color */
+    --input-bg: #ffffff; /* Input field background */
+    --input-border: #a7d9f0; /* Input field border */
+    --input-focus-border: #007bff; /* Input focus border */
+    --button-primary-bg-start: #28a745; /* Primary button background start (green) */
+    --button-primary-bg-end: #218838; /* Primary button background end (green) */
+    --button-primary-hover-bg-start: #218838; /* Primary button hover background start */
+    --button-primary-hover-bg-end: #1e7e34; /* Primary button hover background end */
+    --button-secondary-bg-start: #6c757d; /* Secondary button background start (grey) */
+    --button-secondary-bg-end: #5a6268; /* Secondary button background end (grey) */
+    --button-secondary-hover-bg-start: #5a6268; /* Secondary button hover background start */
+    --button-secondary-hover-bg-end: #494f54; /* Secondary button hover background end */
+    --button-info-bg-start: #007bff; /* Info button background start (blue) */
+    --button-info-bg-end: #0056b3; /* Info button background end (blue) */
+    --button-info-hover-bg-start: #0056b3; /* Info button hover background start */
+    --button-info-hover-bg-end: #004085; /* Info button hover background end */
+    --button-danger-bg-start: #dc3545; /* Danger button background start (red) */
+    --button-danger-bg-end: #c82333; /* Danger button background end (red) */
+    --button-danger-hover-bg-start: #c82333; /* Danger button hover background start */
+    --button-danger-hover-bg-end: #bd2130; /* Danger button hover background end */
+    --button-text-color: #ffffff; /* Button text color */
+    --border-color: #e0e0e0; /* General border color */
+    --box-shadow-light: rgba(0, 0, 0, 0.1); /* Light box shadow */
+    --box-shadow-medium: rgba(0, 0, 0, 0.2); /* Medium box shadow */
+    --box-shadow-strong: rgba(0, 0, 0, 0.3); /* Strong box shadow */
+    --notification-info-bg: #2196F3;
+    --notification-info-text: #ffffff;
+    --notification-success-bg: #4CAF50;
+    --notification-success-text: #ffffff;
+    --notification-error-bg: #f44336;
+    --notification-error-text: #ffffff;
+    --reply-preview-bg: #f0f8ff; /* Background for reply preview */
+    --reply-preview-border: #007bff; /* Border for reply preview */
+    --reply-preview-text: #555;
+    --reply-to-container-bg: #e6f7ff;
+    --reply-to-container-border: #a7d9f0;
+    --reply-to-container-border-left: #007bff;
+    --username-color: #0056b3;
+    --timestamp-color: #888;
+    --selected-message-border: #007bff;
+    --selected-message-bg: #e0f2ff;
+    --online-indicator-color: #28a745; /* Green for online */
+}
+
+body.dark-theme {
+    /* Soft Dark Theme Overrides (Brighter than previous dark) */
+    --bg-color: #36454F; /* Charcoal Grey */
+    --bg-color-end: #415A77; /* Darker Blue-Grey */
+    --header-bg-start: #415A77;
+    --header-bg-end: #36454F;
+    --header-text-color: #E0E0E0; /* Light Grey */
+    --card-bg: #4A607C; /* Medium Blue-Grey */
+    --chat-box-bg: #36454F; /* Same as main background for cohesion */
+    --message-bg: #5A7391; /* Slightly lighter message background */
+    --my-message-bg: #6B8E23; /* Olive Green (still distinct) */
+    --system-message-color: #B0C4DE; /* Light Steel Blue */
+    --text-color: #E0E0E0; /* Light Grey */
+    --input-bg: #4A607C; /* Same as card background */
+    --input-border: #6B8E23; /* Olive Green for input borders */
+    --input-focus-border: #6A5ACD; /* Slate Blue */
+    --button-primary-bg-start: #6B8E23; /* Olive Green */
+    --button-primary-bg-end: #556B2F; /* Dark Olive Green */
+    --button-primary-hover-bg-start: #556B2F;
+    --button-primary-hover-bg-end: #4B5320;
+    --button-secondary-bg-start: #708090; /* Slate Grey */
+    --button-secondary-bg-end: #607080;
+    --button-secondary-hover-bg-start: #607080;
+    --button-secondary-hover-bg-end: #506070;
+    --button-info-bg-start: #6A5ACD; /* Slate Blue */
+    --button-info-bg-end: #483D8B; /* Dark Slate Blue */
+    --button-info-hover-bg-start: #483D8B;
+    --button-info-hover-bg-end: #3A2F70;
+    --button-danger-bg-start: #CD5C5C; /* Indian Red */
+    --button-danger-bg-end: #B22222; /* Firebrick */
+    --button-danger-hover-bg-start: #B22222;
+    --button-danger-hover-bg-end: #8B0000;
+    --button-text-color: #ffffff;
+    --border-color: #5A7391; /* Medium Blue-Grey for borders */
+    --box-shadow-light: rgba(0, 0, 0, 0.25);
+    --box-shadow-medium: rgba(0, 0, 0, 0.45);
+    --box-shadow-strong: rgba(0, 0, 0, 0.65);
+    --notification-info-bg: #6A5ACD;
+    --notification-info-text: #E0E0E0;
+    --notification-success-bg: #6B8E23;
+    --notification-success-text: #E0E0E0;
+    --notification-error-bg: #CD5C5C;
+    --notification-error-text: #ffffff;
+    --reply-preview-bg: #5A7391; /* Slightly lighter than message bg */
+    --reply-preview-border: #6A5ACD;
+    --reply-preview-text: #B0C4DE;
+    --reply-to-container-bg: #5A7391;
+    --reply-to-container-border: #6B8E23;
+    --reply-to-container-border-left: #6A5ACD;
+    --username-color: #B0C4DE;
+    --timestamp-color: #A9A9A9; /* Dark Grey */
+    --selected-message-border: #6A5ACD;
+    --selected-message-bg: #5A7391;
+    --online-indicator-color: #6B8E23; /* Olive Green for online */
+}
+
+/* --- General Body Styles (using variables) --- */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, var(--bg-color) 0%, var(--bg-color-end) 100%); /* Soft gradient background */
+    display: flex;
+    flex-direction: column; /* Changed to column to stack header, main, footer */
+    justify-content: flex-start; /* Align content from the start */
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    color: var(--text-color);
+    line-height: 1.6;
+    padding: 0; /* Remove body padding as header/footer will handle it */
+    box-sizing: border-box;
+    /* Adjusted padding-top to body for minimized fixed header */
+    padding-top: 60px; /* Default padding for header height */
+    transition: background 0.5s ease, color 0.5s ease; /* Smooth transition for theme change */
+}
+
+.container {
+    padding: 30px;
+    border-radius: 12px; /* More rounded corners */
+    box-shadow: 0 12px 30px var(--box-shadow-medium); /* Stronger, softer shadow */
+    width: 100%;
+    max-width: 700px; /* Slightly wider max-width */
+    text-align: center;
+    box-sizing: border-box;
+    border: 1px solid var(--border-color); /* Subtle border for container */
+}
+
+/* Specific styling for the main content container */
+.container.main-content {
+    background-color: var(--card-bg); /* Use card-bg for main content area */
+}
+
+/* Styles for the new header */
+.app-header {
+    background: linear-gradient(90deg, var(--header-bg-start) 0%, var(--header-bg-end) 100%); /* Dark blue gradient for header */
+    color: var(--header-text-color); /* White text for header */
+    padding: 10px 20px; /* Minimized padding */
+    width: 100%;
+    box-shadow: 0 4px 15px var(--box-shadow-strong); /* More prominent header shadow */
+    text-align: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000; /* Ensure header stays on top */
+    display: flex; /* Use flexbox for header content */
+    align-items: center;
+    justify-content: space-between; /* Space out profile and tagline */
+    transition: background 0.5s ease, color 0.5s ease; /* Smooth transition for theme change */
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 700px; /* Match main container width */
+    margin: 0 auto; /* Center content */
+    padding: 0; /* Remove padding from this specific container to minimize height */
+    box-shadow: none !important; /* Ensure no shadow */
+    border: none !important; /* Ensure no border */
+    background-color: transparent !important; /* Ensure it's transparent */
+}
+
+.app-header h1 { /* This H1 is for the main app title in header */
+    color: var(--header-text-color);
+    margin: 0; /* Remove default margins */
+    font-size: 1.8em;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    display: none; /* Hide main H1 for a more compact header, use profile area instead */
+}
+
+.app-header p { /* Tagline */
+    margin: 0;
+    font-size: 0.9em;
+    opacity: 0.9;
+    flex-grow: 1; /* Allow tagline to grow */
+    text-align: right; /* Align tagline to the right */
+}
+
+.profile-area {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between pic and username */
+    color: var(--header-text-color);
+    font-weight: 600;
+}
+
+.profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%; /* Make it round */
+    object-fit: cover; /* Ensure image covers the area */
+    border: 2px solid var(--header-text-color); /* White border around profile pic */
+    box-shadow: 0 0 5px var(--box-shadow-medium);
+}
+
+.header-username {
+    font-size: 1.1em;
+}
+
+/* Position logout button in header */
+.header-controls { /* Added this class to wrap header buttons for better layout */
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between buttons */
+}
+
+.app-header #logout-btn {
+    padding: 8px 15px; /* Smaller padding for header button */
+    font-size: 0.9em;
+    background: linear-gradient(90deg, var(--button-danger-bg-start) 0%, var(--button-danger-bg-end) 100%); /* Red gradient */
+    box-shadow: 0 2px 5px var(--box-shadow-medium);
+    color: var(--button-text-color);
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+.app-header #logout-btn:hover {
+    background: linear-gradient(90deg, var(--button-danger-hover-bg-start) 0%, var(--button-danger-hover-bg-end) 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px var(--box-shadow-strong);
+}
+
+
+/* Main content area */
+.main-content {
+    flex-grow: 1;
+    width: 100%;
+    max-width: 700px;
+    padding: 30px;
+    box-sizing: border-box;
+}
+
+
+h1 { /* This H1 is for the title inside the main content (Authentication/Chat Room) */
+    color: var(--text-color);
+    margin-bottom: 30px;
+    font-size: 2.2em;
+    font-weight: 700;
+    transition: color 0.5s ease;
+}
+
+.card {
+    background-color: var(--card-bg);
+    padding: 25px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 15px var(--box-shadow-light);
+    transition: background-color 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease;
+}
+
+.card h2 {
+    color: var(--text-color);
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1.8em;
+    font-weight: 600;
+    transition: color 0.5s ease;
+}
+
+input[type="text"],
+input[type="password"],
+.room-selection select,
+.file-input {
+    width: calc(100% - 22px);
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid var(--input-border);
+    border-radius: 6px;
+    font-size: 1em;
+    box-sizing: border-box;
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.5s ease, color 0.5s ease;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+.room-selection select:focus,
+.file-input:focus {
+    border-color: var(--input-focus-border);
+    box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.35); /* This rgba value can be kept static or also made a variable */
+    outline: none;
+}
+
+button {
+    background: linear-gradient(90deg, var(--button-primary-bg-start) 0%, var(--button-primary-bg-end) 100%);
+    color: var(--button-text-color);
+    padding: 12px 25px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1em;
+    margin: 5px;
+    transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 3px 8px var(--box-shadow-light);
+}
+
+button:hover {
+    background: linear-gradient(90deg, var(--button-primary-hover-bg-start) 0%, var(--button-primary-hover-bg-end) 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px var(--box-shadow-medium);
+}
+
+button.secondary-btn { /* Style for Upload Profile Pic button */
+    background: linear-gradient(90deg, var(--button-secondary-bg-start) 0%, var(--button-secondary-bg-end) 100%);
+}
+button.secondary-btn:hover {
+    background: linear-gradient(90deg, var(--button-secondary-hover-bg-start) 0%, var(--button-secondary-hover-bg-end) 100%);
+}
+
+button#join-room-btn {
+    background: linear-gradient(90deg, var(--button-info-bg-start) 0%, var(--button-info-bg-end) 100%);
+}
+
+button#join-room-btn:hover {
+    background: linear-gradient(90deg, var(--button-info-hover-bg-start) 0%, var(--button-info-hover-bg-end) 100%);
+}
+
+/* --- Chat Section Layout (NEW FLEXBOX CONTAINER) --- */
+.chat-section {
+    flex-grow: 1;
+    display: flex; /* Make chat-section a flex container */
+    flex-direction: column; /* Stack its children (chat-main-content) vertically */
+    padding: 20px;
+    max-width: 1000px; /* Increased max-width to accommodate sidebar */
+    margin: 20px auto;
+    background-color: var(--card-bg); /* Use card-bg for the main chat container */
+    border-radius: 10px;
+    box-shadow: 0 4px 15px var(--box-shadow-medium);
+    height: calc(100vh - 150px); /* Adjust height to fit header and footer */
+    box-sizing: border-box;
+    transition: background-color 0.5s ease, box-shadow 0.5s ease;
+}
+
+.chat-main-content { /* NEW wrapper for chat box and online users sidebar */
+    display: flex;
+    flex-grow: 1; /* Allow it to take available height */
+    gap: 20px; /* Space between chat box and sidebar */
+}
+
+.chat-box-wrapper { /* Existing chat content, now wrapped */
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Allow chat box to grow */
+    min-width: 0; /* Allow content to shrink */
+}
+
+.messages-box {
+    border: 1px solid var(--input-border);
+    padding: 15px;
+    height: 350px; /* Fixed height for scrollability */
+    overflow-y: auto;
+    margin-bottom: 15px;
+    background-color: var(--chat-box-bg);
+    color: var(--text-color);
+    text-align: left;
+    border-radius: 8px;
+    box-shadow: inset 0 1px 5px var(--box-shadow-light);
+    transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease, box-shadow 0.5s ease;
+    flex-grow: 1; /* Allow messages box to fill available height */
+}
+
+.message {
+    margin-bottom: 10px;
+    padding: 10px 15px;
+    border-radius: 10px;
+    background-color: var(--message-bg);
+    box-shadow: 0 2px 8px var(--box-shadow-light);
+    word-wrap: break-word;
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    transition: background-color 0.5s ease, box-shadow 0.5s ease, border 0.2s ease;
+}
+
+.message-profile-pic {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid var(--border-color);
+    flex-shrink: 0;
+}
+
+.message-content {
+    flex-grow: 1;
+}
+
+.message strong {
+    color: var(--username-color);
+    font-weight: 600;
+    display: block;
+    margin-bottom: 5px;
+    transition: color 0.5s ease;
+}
+
+.message .timestamp {
+    font-size: 0.7em;
+    color: var(--timestamp-color);
+    margin-left: 10px;
+    float: right;
+    position: absolute;
+    bottom: 5px;
+    right: 10px;
+    transition: color 0.5s ease;
+}
+
+.message.system {
+    font-style: italic;
+    color: var(--system-message-color);
+    text-align: center;
+    background-color: var(--card-bg);
+    border-left: 5px solid #ffc107; /* Warning yellow, can be a variable */
+    padding: 12px;
+    box-shadow: 0 2px 8px var(--box-shadow-light);
+    transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+/* New styles for uploaded files */
+.chat-image {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin-top: 10px;
+    border-radius: 8px;
+    box-shadow: 0 3px 10px var(--box-shadow-medium);
+}
+
+.chat-file-link {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 12px;
+    background-color: var(--reply-to-container-bg);
+    border: 1px solid var(--reply-to-container-border);
+    border-radius: 6px;
+    color: var(--button-info-bg-start);
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease, color 0.5s ease;
+    box-shadow: 0 1px 5px var(--box-shadow-light);
+}
+
+.chat-file-link:hover {
+    background-color: var(--button-info-hover-bg-start);
+    color: var(--button-text-color);
+    text-decoration: underline;
+    box-shadow: 0 2px 8px var(--box-shadow-medium);
+}
+
+
+.hidden {
+    display: none;
+}
+
+/* Notification Message Box */
+#notification-message {
+    position: fixed;
+    top: 70px; /* Below the header */
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    z-index: 1001;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+    box-shadow: 0 4px 8px var(--box-shadow-medium);
+    min-width: 250px;
+    text-align: center;
+}
+
+#notification-message.show {
+    opacity: 1;
+    visibility: visible;
+}
+#notification-message.error {
+    background-color: var(--notification-error-bg);
+    color: var(--notification-error-text);
+}
+#notification-message.info {
+    background-color: var(--notification-info-bg);
+    color: var(--notification-info-text);
+}
+#notification-message.success {
+    background-color: var(--notification-success-bg);
+    color: var(--notification-success-text);
+}
+
+
+.room-selection {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.room-selection label {
+    font-weight: 600;
+    color: var(--text-color);
+    transition: color 0.5s ease;
+}
+
+.room-selection select {
+    flex-grow: 1;
+    max-width: 200px;
+    margin-bottom: 0;
+}
+
+/* Input and Send button alignment - UPDATED FOR FILE INPUT */
+.message-input-area {
+    display: flex;
+    flex-direction: column; /* Stack reply container, file input, message input */
+    align-items: stretch; /* Stretch items to fill width */
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+#file-input {
+    flex-grow: 1;
+    min-width: 100px;
+    margin-bottom: 0;
+}
+
+#message-input {
+    flex-grow: 3;
+    min-width: 150px;
+    margin-right: 0;
+    margin-bottom: 0;
+}
+
+#send-btn {
+    width: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-bottom: 0;
+    align-self: flex-end; /* Align send button to the right */
+}
+
+/* Reply-to container styling */
+.reply-to-container {
+    background-color: var(--reply-to-container-bg);
+    border: 1px solid var(--reply-to-container-border);
+    border-left: 4px solid var(--reply-to-container-border-left);
+    padding: 8px 12px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9em;
+    color: var(--text-color);
+    transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease;
+}
+
+.reply-to-container strong {
+    color: var(--username-color);
+    transition: color 0.5s ease;
+}
+
+.reply-to-container .cancel-reply-btn {
+    background: none;
+    border: none;
+    color: var(--system-message-color);
+    font-size: 1.2em;
+    cursor: pointer;
+    padding: 0 5px;
+    transition: color 0.2s ease;
+    box-shadow: none; /* Remove button shadow */
+    margin: 0; /* Remove button margin */
+}
+.reply-to-container .cancel-reply-btn:hover {
+    color: var(--button-danger-bg-start); /* Red on hover */
+    transform: none; /* Prevent transform on hover */
+    background: none; /* Prevent background change on hover */
+}
+
+/* Styling for replied message preview within a message */
+.reply-preview {
+    background-color: var(--reply-preview-bg);
+    border-left: 3px solid var(--reply-preview-border);
+    padding: 5px 10px;
+    margin-bottom: 8px;
+    border-radius: 5px;
+    font-size: 0.85em;
+    color: var(--reply-preview-text);
+    word-wrap: break-word; /* Ensure long text wraps */
+    transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease;
+}
+
+.reply-preview strong {
+    color: var(--username-color);
+    transition: color 0.5s ease;
+}
+
+.reply-preview .replied-text {
+    display: block; /* Make replied text a block to wrap below "Replying to" */
+    margin-top: 3px;
+    font-style: italic;
+    color: var(--system-message-color);
+    transition: color 0.5s ease;
+}
+
+
+#send-btn-area { /* This is a new div to wrap message input and send button */
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
+#send-btn-area #message-input {
+    flex-grow: 1;
+    margin-bottom: 0; /* Remove bottom margin from input here */
+}
+#send-btn-area #send-btn {
+    margin-bottom: 0; /* Remove bottom margin from button here */
+}
+
+
+/* Styles for the new footer */
+.app-footer {
+    background: linear-gradient(90deg, var(--header-bg-end) 0%, var(--header-bg-start) 100%);
+    color: var(--header-text-color);
+    padding: 15px 20px;
+    width: 100%;
+    text-align: center;
+    font-size: 0.9em;
+    box-shadow: 0 -4px 15px var(--box-shadow-strong);
+    margin-top: auto;
+    transition: background 0.5s ease, color 0.5s ease;
+}
+
+.app-footer p {
+    margin: 0;
+    opacity: 0.9;
+}
+
+/* Specific styling for the footer container */
+.app-footer .container {
+    padding: 0 20px; /* Add horizontal padding to create space from edges */
+    box-shadow: none !important;
+    border: none !important;
+    background-color: transparent !important;
+    display: flex;
+    flex-direction: row; /* Changed to row for side-by-side layout */
+    justify-content: space-between; /* Pushes items to opposite ends */
+    align-items: center; /* Vertically center items */
+    gap: 10px; /* Space between copyright and social links if they wrap */
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+}
+
+/* Social media links styling */
+.social-links {
+    display: flex;
+    gap: 15px; /* Space between icons */
+    margin-top: 0; /* Remove top margin as it's now row */
+}
+
+.social-links a {
+    color: var(--header-text-color);
+    font-size: 1.8em; /* Adjusted icon size for Bootstrap Icons */
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.social-links a:hover {
+    color: var(--button-info-bg-start); /* Change color on hover */
+    transform: translateY(-3px); /* Slight lift on hover */
+}
+
+
+/* Scroll-to-top button styles */
+.scroll-to-top-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: var(--button-info-bg-start);
+    color: var(--button-text-color);
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 4px 10px var(--box-shadow-medium);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out, background-color 0.5s ease;
+    z-index: 999;
+}
+
+.scroll-to-top-btn.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.scroll-to-top-btn:hover {
+    background-color: var(--button-info-hover-bg-start);
+}
+
+/* Chat header controls for profile pic upload button */
+.chat-header-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.chat-header-controls h2 {
+    margin: 0;
+    flex-grow: 1;
+    text-align: left;
+}
+
+
+/* Message Selection Styles */
+.message.selected-message {
+    border: 2px solid var(--selected-message-border); /* Border for selected messages */
+    background-color: var(--selected-message-bg); /* Background for selected messages */
+    border-radius: 10px; /* Keep consistent with message border-radius */
+    padding: 10px 15px; /* Keep consistent with message padding */
+}
+
+#delete-selected-btn {
+    background: linear-gradient(90deg, var(--button-danger-bg-start) 0%, var(--button-danger-bg-end) 100%); /* Red gradient */
+    color: var(--button-text-color);
+    border: none;
+    padding: 10px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 3px 8px var(--box-shadow-light);
+}
+
+#delete-selected-btn:hover {
+    background: linear-gradient(90deg, var(--button-danger-hover-bg-start) 0%, var(--button-danger-hover-bg-end) 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px var(--box-shadow-medium);
+}
+
+#delete-selected-btn.hidden {
+    display: none;
+}
+
+#cancel-selection-btn {
+    background: linear-gradient(90deg, var(--button-secondary-bg-start) 0%, var(--button-secondary-bg-end) 100%); /* Grey gradient */
+    color: var(--button-text-color);
+    border: none;
+    padding: 10px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 3px 8px var(--box-shadow-light);
+}
+
+#cancel-selection-btn:hover {
+    background: linear-gradient(90deg, var(--button-secondary-hover-bg-start) 0%, var(--button-secondary-hover-bg-end) 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px var(--box-shadow-medium);
+}
+
+#cancel-selection-btn.hidden {
+    display: none;
+}
+
+#chat-action-buttons {
+    display: flex;
+    gap: 10px; /* Space between buttons */
+    margin-top: 10px;
+    justify-content: center; /* Center the buttons */
+    padding-bottom: 10px; /* Add some padding at the bottom */
+}
+
+/* Theme Toggle Button Style */
+#theme-toggle-btn {
+    background: linear-gradient(90deg, var(--button-info-bg-start) 0%, var(--button-info-bg-end) 100%);
+    color: var(--button-text-color);
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px; /* Slightly rounded */
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 2px 5px var(--box-shadow-light);
+}
+
+#theme-toggle-btn:hover {
+    background: linear-gradient(90deg, var(--button-info-hover-bg-start) 0%, var(--button-info-hover-bg-end) 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px var(--box-shadow-medium);
+}
+
+/* --- Online Users Sidebar Styles --- */
+.online-users-sidebar {
+    width: 250px; /* Default width for the sidebar */
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 4px 15px var(--box-shadow-light);
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0; /* Prevent sidebar from shrinking */
+    transition: width 0.3s ease, padding 0.3s ease, background-color 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease;
+    overflow: hidden; /* Hide content that overflows when minimized */
+}
+
+.online-users-header { /* NEW: Header for sidebar */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+    transition: border-color 0.5s ease;
+}
+
+.online-users-sidebar h3 {
+    margin: 0;
+    color: var(--text-color);
+    font-size: 1.4em;
+    white-space: nowrap; /* Prevent text wrapping */
+    overflow: hidden; /* Hide overflow when minimized */
+    text-overflow: ellipsis; /* Add ellipsis for overflow */
+    transition: color 0.5s ease, opacity 0.3s ease;
+}
+
+.toggle-sidebar-btn { /* NEW: Style for the toggle button */
+    background: none;
+    border: none;
+    color: var(--text-color);
+    font-size: 1.5em;
+    cursor: pointer;
+    padding: 0 5px;
+    line-height: 1; /* Ensure consistent height */
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.toggle-sidebar-btn:hover {
+    color: var(--button-info-bg-start);
+}
+
+/* Styles for minimized state */
+.online-users-sidebar.minimized {
+    width: 50px; /* Minimized width */
+    padding: 15px 5px; /* Reduced padding */
+}
+
+.online-users-sidebar.minimized .online-users-header {
+    justify-content: center; /* Center the toggle button */
+    border-bottom: none; /* Remove border when minimized */
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.online-users-sidebar.minimized h3 {
+    display: none; /* Hide heading when minimized */
+    opacity: 0;
+}
+
+.online-users-sidebar.minimized #online-users-list {
+    display: none; /* Hide the list when minimized */
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.online-users-sidebar.minimized .toggle-sidebar-btn {
+    transform: rotate(0deg); /* Ensure it points right */
+}
+
+
+#online-users-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex-grow: 1; /* Allow list to grow and scroll if needed */
+    overflow-y: auto; /* Enable scrolling for long lists */
+    transition: opacity 0.3s ease; /* Smooth transition for list appearance */
+}
+
+.online-user-item {
+    display: flex;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px dashed var(--border-color); /* Subtle separator */
+    color: var(--text-color);
+    font-weight: 500;
+    transition: color 0.5s ease, border-color 0.5s ease;
+}
+
+.online-user-item:last-child {
+    border-bottom: none; /* No border for the last item */
+}
+
+.online-user-pic {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+    border: 1px solid var(--border-color);
+    flex-shrink: 0;
+}
+
+.online-username {
+    flex-grow: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.online-indicator {
+    width: 10px;
+    height: 10px;
+    background-color: var(--online-indicator-color); /* Green dot for online */
+    border-radius: 50%;
+    margin-left: 10px;
+    flex-shrink: 0;
+}
+
+.you-label {
+    font-size: 0.8em;
+    font-style: italic;
+    color: var(--system-message-color);
+    margin-left: 5px;
+    flex-shrink: 0;
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+        border-radius: 8px;
+    }
+
+    /* Adjust header for smaller screens */
+    .app-header {
+        padding: 8px 15px;
+        flex-direction: column; /* Stack profile area and tagline */
+        align-items: flex-start;
+    }
+    .app-header h1 {
+        font-size: 1.5em;
+    }
+    .app-header p {
+        font-size: 0.8em;
+        text-align: left;
+        width: 100%; /* Take full width */
+    }
+    /* Adjust logout button for smaller screens */
+    .header-controls { /* Use this wrapper for responsive button stacking */
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px; /* Reduce gap for stacked buttons */
+        margin-top: 10px;
+    }
+    .app-header #logout-btn,
+    #theme-toggle-btn { /* Apply to both header buttons */
+        width: 100%;
+        margin: 0; /* Remove individual margins */
+        text-align: center;
+    }
+
+
+    /* Adjust body padding for smaller header */
+    body {
+        padding-top: 50px;
+    }
+
+    h1 {
+        font-size: 1.8em;
+        margin-bottom: 20px;
+    }
+
+    .card {
+        padding: 15px;
+        margin-bottom: 15px;
+    }
+
+    .card h2 {
+        font-size: 1.5em;
+        margin-bottom: 15px;
+    }
+
+    input[type="text"],
+    input[type="password"],
+    .room-selection select,
+    .file-input,
+    button {
+        width: 100%;
+        margin: 5px 0;
+    }
+
+    .room-selection {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .room-selection select {
+        max-width: 100%;
+    }
+
+    .message-input-area {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 5px;
+    }
+
+    #file-input {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 5px;
+    }
+    #message-input {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 5px;
+    }
+    #send-btn {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    #send-btn-area {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+
+    .scroll-to-top-btn {
+        width: 45px;
+        height: 45px;
+        font-size: 1.8em;
+        bottom: 15px;
+        right: 15px;
+    }
+
+    .chat-header-controls {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .chat-header-controls h2 {
+        text-align: center; /* Center chat room title on mobile */
+        width: 100%;
+    }
+
+    /* --- Responsive for Online Users Sidebar --- */
+    .chat-main-content {
+        flex-direction: column; /* Stack chat box and sidebar vertically on smaller screens */
+        gap: 15px;
+    }
+
+    .online-users-sidebar {
+        width: 100%; /* Full width on smaller screens */
+        order: -1; /* Place sidebar above chat box on mobile */
+        padding: 15px; /* Reset padding for full width */
+    }
+
+    .online-users-sidebar.minimized {
+        width: 100%; /* Still full width, but content hidden */
+        padding: 15px; /* Keep padding */
+    }
+
+    .online-users-sidebar.minimized .online-users-header {
+        justify-content: space-between; /* Keep space-between for mobile */
+    }
+
+    .online-users-sidebar.minimized h3 {
+        display: block; /* Show heading on mobile even when minimized */
+        opacity: 1;
+        flex-grow: 1; /* Allow heading to take space */
+        text-align: left;
+    }
+
+
+    /* Footer responsive adjustment */
+    .app-footer .container {
+        flex-direction: column; /* Stack on smaller screens */
+        text-align: center;
+    }
+    .social-links {
+        margin-top: 10px; /* Add back margin when stacked */
+        justify-content: center; /* Center social links when stacked */
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+        padding-top: 45px;
+    }
+    .container {
+        padding: 15px;
+    }
+    h1 {
+        font-size: 1.5em;
+    }
+    .card h2 {
+        font-size: 1.3em;
+    }
+    .messages-box {
+        height: 250px;
+    }
+    .app-header h1 {
+        font-size: 1.2em;
+    }
+    .app-header p {
+        display: none; /* Hide tagline on very small screens */
+    }
+}

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-time Chat App</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Socket.IO client library -->
+    <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+    <!-- Bootstrap Icons for social media icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+<body>
+    <header class="app-header">
+        <div class="container header-content">
+            <div class="profile-area">
+                <img id="header-profile-pic" src="https://placehold.co/40x40/cccccc/ffffff?text=P" alt="Profile Picture" class="profile-pic">
+                <span id="header-username" class="header-username">Guest</span>
+            </div>
+            <p>Connect and share instantly</p>
+            <div class="header-controls"> <!-- NEW: Wrapper for header buttons -->
+                <!-- Theme toggle button will be inserted here by script.js -->
+                <button id="logout-btn" class="hidden">Logout</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="container main-content">
+        <div id="auth-section" class="card">
+            <h2>Authentication</h2>
+            <input type="text" id="auth-username" placeholder="Username">
+            <input type="password" id="auth-password" placeholder="Password">
+            <button id="register-btn">Register</button>
+            <button id="login-btn">Login</button>
+            <p id="auth-message" class="message"></p>
+        </div>
+
+        <div id="chat-section" class="card hidden">
+            <div class="chat-main-content"> <!-- NEW: Wrapper for chat box and online users sidebar -->
+                <div class="chat-box-wrapper"> <!-- NEW: Wrapper for main chat content -->
+                    <div class="chat-header-controls">
+                        <h2>Chat Room: <span id="current-room-display">General</span></h2>
+                        <button id="upload-profile-pic-btn" class="secondary-btn">Upload Profile Pic</button>
+                        <input type="file" id="profile-pic-input" accept="image/*" class="hidden">
+                    </div>
+                    <div class="room-selection">
+                        <label for="room-select">Select Room:</label>
+                        <select id="room-select">
+                            <option value="General">General</option>
+                            <option value="TechTalk">TechTalk</option>
+                            <option value="Random">Random</option>
+                        </select>
+                        <button id="join-room-btn">Join Room</button>
+                    </div>
+                    <div id="messages" class="messages-box">
+                        <!-- Messages will be loaded here -->
+                    </div>
+                    <div id="chat-action-buttons">
+                        <!-- Delete Selected and Cancel Selection buttons will be inserted here by script.js -->
+                    </div>
+                    <div class="message-input-area">
+                        <div id="reply-to-container" class="reply-to-container hidden">
+                            <span id="reply-to-text"></span>
+                            <button id="cancel-reply-btn" class="cancel-reply-btn">&times;</button>
+                        </div>
+                        <input type="file" id="file-input" class="file-input">
+                        <div id="send-btn-area">
+                            <input type="text" id="message-input" placeholder="Type a message...">
+                            <button id="send-btn">Send</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NEW: Online Users Sidebar -->
+                <div id="online-users-sidebar" class="online-users-sidebar minimized"> <!-- Added 'minimized' class by default -->
+                    <div class="online-users-header"> <!-- NEW: Header for sidebar -->
+                        <h3>Online Users</h3>
+                        <button id="toggle-online-users-btn" class="toggle-sidebar-btn">&gt;</button> <!-- NEW: Toggle button, pointing right by default -->
+                    </div>
+                    <ul id="online-users-list">
+                        <!-- Online users will be listed here by script.js -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="app-footer">
+        <div class="container">
+            <p>&copy; 2025 Gedefaye Anteneh. All rights reserved.</p>
+            <div class="social-links">
+                <a href="https://t.me/@TigistuAnteneh" target="_blank" aria-label="Telegram"><i class="bi bi-telegram"></i></a>
+                <a href="https://www.youtube.com/@GedefayeAntenehTube" target="_blank" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+                <a href="https://www.facebook.com/TigistuAnteneh" target="_blank" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                <a href="https://www.linkedin.com/in/gedefayeanteneh" target="_blank" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                <a href="https://www.tiktok.com/@gedefayeanteneh" target="_blank" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
+                <a href="https://www.instagram.com/tigistuanteneh" target="_blank" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                <a href="https://x.com/@GedefayeAnteneh" target="_blank" aria-label="Twitter/X"><i class="bi bi-twitter-x"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
