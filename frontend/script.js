@@ -1,6 +1,7 @@
 // script.js - Frontend logic for the chat application with UI enhancements, file upload, and scroll-up button
 
-const backendUrl = 'http://localhost:5000'; // Make sure this matches your backend URL
+//const backendUrl = 'http://localhost:5000'; // Make sure this matches your backend URL
+const backendUrl = 'https://chat-app-xcjr.onrender.com';
 
 // DOM Elements
 const authSection = document.getElementById('auth-section');
