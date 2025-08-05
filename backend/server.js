@@ -19,6 +19,8 @@ const Message = require('./models/Message'); // Message model
 const protect = require('./middleware/auth'); // JWT authentication middleware
 
 // Load environment variables from .env file
+// dotenv.config() is used for local development. On Render, environment variables
+// are set directly in the dashboard, so this line will be effectively ignored there.
 dotenv.config();
 
 // Import database connection function
@@ -29,19 +31,38 @@ connectDB();
 
 const app = express();
 const server = http.createServer(app);
+
+// Configure CORS for Socket.IO
+// In production, replace "*" with your Render frontend URL (e.g., "https://your-frontend-app.onrender.com")
+// You can use process.env.FRONTEND_URL for this.
+const allowedOrigin = process.env.FRONTEND_URL || "*";
+
 const io = socketIo(server, {
     cors: {
-        origin: "*", // Allow all origins for development. In production, specify your frontend URL.
-        methods: ["GET", "POST"]
+        origin: allowedOrigin,
+        methods: ["GET", "POST"],
+        credentials: true // Important for sending cookies/auth headers if you use them
     },
     maxHttpBufferSize: 1e8 // 100 MB limit for file uploads via Socket.IO
 });
 
 // Create 'uploads' directory and its subdirectories if they don't exist
+// On Render, these directories will be managed by the Persistent Disk.
+// Ensure the path matches the Mount Path configured in Render's Disk settings.
+// For a service with root directory 'chat-app-backend/', the mount path will be relative to it.
+// Example: if Render Disk Mount Path is /var/data, then chatFilesDir will be /var/data/chat_files
+// However, since we're serving from /uploads, we need to map the Express static route correctly.
+// A common practice is to mount the disk at a known location, e.g., /mnt/data, and then
+// configure multer to save there, and Express to serve from there.
+// For simplicity, let's assume the Render Persistent Disk is mounted at exactly `uploadsDir`
+// which is `path.join(__dirname, 'uploads')`. This means Render will overlay its disk
+// on this specific folder.
 const uploadsDir = path.join(__dirname, 'uploads');
 const chatFilesDir = path.join(uploadsDir, 'chat_files');
 const profilePicsDir = path.join(uploadsDir, 'profile_pics');
 
+// Ensure directories exist for local development and initial Render build.
+// On Render, if a persistent disk is mounted, these will be created on the disk.
 if (!fs.existsSync(uploadsDir)) {
     fs.mkdirSync(uploadsDir);
 }
@@ -89,10 +110,21 @@ const uploadProfilePic = multer({
 
 
 // Middleware
-app.use(cors());
+// Configure CORS for Express routes.
+// In production, replace "*" with your Render frontend URL (e.g., "https://your-frontend-app.onrender.com")
+app.use(cors({
+    origin: allowedOrigin,
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true
+}));
 app.use(express.json()); // For parsing application/json
 app.use(express.urlencoded({ extended: true })); // For parsing application/x-www-form-urlencoded
-app.use('/uploads', express.static(uploadsDir)); // Serve all uploads statically
+
+// Serve uploaded files statically.
+// This path '/uploads' must match the prefix used in your frontend to fetch files.
+// The `uploadsDir` should be the same directory where Multer saves files,
+// and where Render's Persistent Disk is mounted.
+app.use('/uploads', express.static(uploadsDir));
 
 // Request logging middleware (for debugging)
 app.use((req, res, next) => {
@@ -111,7 +143,7 @@ app.post('/api/upload', protect, uploadChatFile.single('chatFile'), (req, res) =
     }
     res.status(200).json({
         message: 'File uploaded successfully',
-        filePath: `/uploads/chat_files/${req.file.filename}`,
+        filePath: `/uploads/chat_files/${req.file.filename}`, // Path accessible from frontend
         fileName: req.file.originalname,
         mimetype: req.file.mimetype
     });
@@ -130,8 +162,10 @@ app.post('/api/profile/upload-pic', protect, uploadProfilePic.single('profilePic
         }
 
         // Delete old profile picture if it exists and is not a default placeholder
+        // Ensure the path to delete matches where files are actually stored on the disk.
         if (user.profilePicUrl && user.profilePicUrl.startsWith('/uploads/profile_pics/')) {
-            const oldPath = path.join(__dirname, user.profilePicUrl);
+            const oldFilename = path.basename(user.profilePicUrl); // Get just the filename
+            const oldPath = path.join(profilePicsDir, oldFilename); // Construct full path within disk
             if (fs.existsSync(oldPath)) {
                 fs.unlink(oldPath, (err) => {
                     if (err) console.error('Error deleting old profile pic:', err);
@@ -158,10 +192,10 @@ io.use(async (socket, next) => {
     console.log('Socket.IO: Attempting authentication...');
     if (socket.handshake.auth && socket.handshake.auth.token) {
         const token = socket.handshake.auth.token;
-        console.log('Socket.IO: Token received:', token);
+        // console.log('Socket.IO: Token received:', token); // Avoid logging sensitive tokens in production
         try {
             const decoded = jwt.verify(token, process.env.JWT_SECRET);
-            console.log('Socket.IO: Token decoded:', decoded);
+            // console.log('Socket.IO: Token decoded:', decoded); // Avoid logging sensitive info
             socket.user = await User.findById(decoded.id).select('-password'); // Attach user to socket
             if (socket.user) {
                 console.log('Socket.IO: User found and attached:', socket.user.username);
@@ -196,9 +230,10 @@ io.on('connection', (socket) => {
     onlineUsers.set(socket.id, userDetails);
 
     // Emit the current list of online users to the newly connected user
-    socket.emit('updateOnlineUsers', Array.from(onlineUsers.values()));
+    socket.emit('currentRoomUsers', Array.from(onlineUsers.values())); // Use 'currentRoomUsers' event name as in frontend
 
     // Broadcast that a new user has joined to everyone else (excluding the sender)
+    // Note: 'userJoined' event in frontend expects a user object, not just username.
     socket.broadcast.emit('userJoined', userDetails);
 
     // Join a room
@@ -214,7 +249,8 @@ io.on('connection', (socket) => {
             user.currentRoom = roomName;
             onlineUsers.set(socket.id, user); // Update the map
             // Broadcast the updated online users list to reflect room changes
-            io.emit('updateOnlineUsers', Array.from(onlineUsers.values()));
+            // This ensures everyone sees consistent online status and room info
+            io.emit('currentRoomUsers', Array.from(onlineUsers.values()));
         }
 
         // Announce user joining the room to the room itself
@@ -280,13 +316,16 @@ io.on('connection', (socket) => {
         if (disconnectedUser) {
             onlineUsers.delete(socket.id);
             // Broadcast that a user has left to everyone
+            // Note: 'userLeft' event in frontend expects a username string.
             io.emit('userLeft', disconnectedUser.username);
             // Also update the full list for everyone
-            io.emit('updateOnlineUsers', Array.from(onlineUsers.values()));
+            io.emit('currentRoomUsers', Array.from(onlineUsers.values()));
         }
     });
 });
 
+// Render will set the PORT environment variable.
+// We use process.env.PORT to ensure the app listens on the correct port.
 const PORT = process.env.PORT || 5000;
 
 server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
